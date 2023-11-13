@@ -3,6 +3,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.web.WebEngine;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -14,7 +15,12 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
+import javafx.scene.control.ColorPicker;
+import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.io.FileInputStream;
+import javafx.scene.web.WebView;
 public class MyFxApp extends Application  {
     double barStatus = 0.1;
     @Override
@@ -57,14 +63,36 @@ public class MyFxApp extends Application  {
 
         CheckBox checkBox1 = new CheckBox("Green");
         RadioButton radioButton1 = new RadioButton("Left");
-        TextArea textArea = new TextArea();
-        TextField textField = new TextField();
+        //    TextArea textArea = new TextArea();
+       // TextField textField = new TextField();
+        Text text2 = new Text("Change Progress Bar Color: ");
+        Button button3 = new Button("Confirm Color Change");
 
-        HBox hbox = new HBox(button1, button2, textField);
-        VBox Vbox1 = new VBox(text,label, progressBar,hbox, menuButton, checkBox1, radioButton1,textArea);
+        ColorPicker colorPicker = new ColorPicker();
 
 
-        Scene scene = new Scene(Vbox1, 500, 200);
+        button3.setOnAction(actionEvent -> {
+            Color value = colorPicker.getValue();
+            String colorValue = value.toString();
+            String newColor = colorValue.substring(2);
+            progressBar.setStyle("-fx-accent:" + "#" +newColor);
+        });
+
+
+        FileInputStream input = new FileInputStream("Images/WeUpBoys!!!!!!.png");
+        Image image = new Image(input);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(200);
+        imageView.setFitWidth(350);
+
+
+        HBox hbox = new HBox(button1, button2);
+        VBox h2box = new VBox(radioButton1,text2,colorPicker,button3,checkBox1);
+
+        VBox Vbox1 = new VBox(text,label, progressBar,hbox,h2box,imageView);
+
+
+        Scene scene = new Scene(Vbox1, 500, 400);
 
 
 
