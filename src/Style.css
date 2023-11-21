@@ -1,0 +1,15 @@
+.root{
+    -fx-background-color: #ffff66;
+
+}
+
+.label{
+    -fx-text-fill: black;
+}
+
+
+
+.text-area{
+    -fx-background-color: white;
+    -fx-background-radius: 0;
+}
